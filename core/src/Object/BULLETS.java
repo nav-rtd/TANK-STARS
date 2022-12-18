@@ -28,7 +28,7 @@ public class BULLETS extends Destructable_Objects {
         bullet_def.type=BodyDef.BodyType.DynamicBody;
         bullet=game.world.createBody(bullet_def);
         bullet.createFixture(shape,1f).setUserData(this);
-        bullet.setLinearVelocity(100,100);
+        bullet.setLinearVelocity(100,600);
     }
 
     @Override

@@ -55,7 +55,6 @@ public class Gamescreen implements Screen {
     public Gamescreen(TankWar tank) {
         this.game=tank;
         p1=new Tank(this.game);
-        this.game.world.setContactListener(new Listner(this.game,p1));
         anchor=new Vector2(p1.getPlayer().getPosition().x,p1.getPlayer().getPosition().y);
         firing_position=anchor.cpy();
         this.GAMEBACKGROUND= new Texture("Asset_4_2.png");
@@ -64,11 +63,10 @@ public class Gamescreen implements Screen {
         this.Player2_health=new Texture("Health_Bar.png");
         this.Player1_fuel=new Texture("Fuel.png");
         this.Player2_fuel=new Texture("Fuel.png");
-        game.tiledMap=new TmxMapLoader().load("Map.tmx");
+        game.tiledMap=new TmxMapLoader().load("map.tmx");
         game.tiledMapRenderer=new OrthogonalTiledMapRenderer(tank.tiledMap,1/4f);
         game.cam=new OrthographicCamera();
         game.cam.setToOrtho(false,800/4f,800/4f);
-        Terrain ter=new Terrain(game.tiledMap,game.world,this.game);
 
     }
     @Override
@@ -85,8 +83,6 @@ public class Gamescreen implements Screen {
         game.batch.begin();
         game.batch.draw(game.getTank1(),p1.getPlayer().getPosition().x-(8/2f),p1.getPlayer().getPosition().y-(8/2f),8,8);
         game.batch.end();
-        game.box2DDebugRenderer.render(game.world,game.cam.combined);
-        game.input_update(Gdx.graphics.getDeltaTime(),chance,p1);
 //        ScreenUtils.clear(0, 0, 0, 0.5f);
 //        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
 //            music.play();
@@ -109,20 +105,7 @@ public class Gamescreen implements Screen {
 //        game.batch.draw(Player2_fuel,1340,750,100,20);
 //        game.batch.draw(Player2_health,1250,770,200,30);
 //        game.batch.end();
-     try {
 
-           for (Fixture fixture : game.destroy) {
-               f=fixture;
-               if (((Destructable_Objects)fixture.getUserData()).getCheck()) {
-                   game.world.destroyBody(fixture.getBody());
-                   game.destroy.removeValue(fixture,true);
-                }
-
-            }
-        }
-     catch (Exception e){
-         game.destroy.removeValue(f,true);
-     }
 //     try{
 //         for(Fixture fixture:game.Bulletdestroy){
 //             if(((BULLETS)fixture.getUserData()).C){
@@ -168,7 +151,35 @@ public class Gamescreen implements Screen {
         game.batch.setProjectionMatrix(game.cam.combined);
 
     }
+    public void input_update(float delta,boolean chance,Tank p1){
 
+        Tank current=p1;
+//        if(!chance){
+//            current=p1;
+//            chance=!chance;
+//        }
+//        else{
+//            current=p2;
+//            chance=!chance;
+//        }
+        int vertical_force=0;
+        int horizontal_force=0;
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            horizontal_force-=1;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            horizontal_force+=1;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            vertical_force+=1;
+        }
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+            BULLETS x=new BULLETS(game,p1);
+        }
+        current.getPlayer().setLinearVelocity(horizontal_force*100,vertical_force*50);
+
+
+    }
 
     public Tank getP1() {
         return p1;

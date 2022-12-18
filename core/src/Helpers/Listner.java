@@ -1,7 +1,6 @@
 package Helpers;
 
 import Screens.Gamescreen;
-import com.badlogic.gdx.ai.steer.behaviors.Face;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -28,10 +27,6 @@ public class Listner implements ContactListener{
         Point p;
         Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
-        if(fa.getUserData().toString()=="Tank"&&fb.getUserData().toString()=="Ground") {
-
-
-        }
 
 
 
@@ -53,8 +48,7 @@ public class Listner implements ContactListener{
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        Fixture fa=contact.getFixtureA();
-        Fixture fb=contact.getFixtureB();
+
     }
 
     @Override
@@ -80,18 +74,7 @@ public class Listner implements ContactListener{
             else if(fa.getUserData().toString()=="Ground"&&fb.getUserData().toString()=="BULLET"){
                 parent.destroy.add(fa);
                 parent.destroy.add(fb);
-
-                try{
-                    tileset.setCell(((Holder)fa.getUserData()).p.getX(), ((Holder)fa.getUserData()).p.getY(),null);
-                }
-                catch (Exception e){
-
-                }
             }
-            if(fa.getUserData().toString()=="Tank"&&fb.getUserData().toString()=="Ground"){
-                ((Tank)fa.getUserData()).getPlayer().applyLinearImpulse(1000f,0,fa.getBody().getPosition().x*4,fa.getBody().getPosition().y*4,false);
-            }
-
 
 
 

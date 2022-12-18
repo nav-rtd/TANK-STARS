@@ -50,7 +50,7 @@ public class TankWar extends Game {
 	public void create () {
 		fitViewport=new FitViewport(800,800);
 		batch = new SpriteBatch();
-		world=new World(new Vector2(0,-9.8f*25f),false);
+		world=new World(new Vector2(0,0),false);
 		box2DDebugRenderer=new Box2DDebugRenderer();
 		this.setScreen(new Gamescreen(this));
 		Tank1=new Texture("Tank1.png");
@@ -78,35 +78,6 @@ public class TankWar extends Game {
 	}
 	public Texture getTank2(){
 		return Tank2;
-	}
-	public void input_update(float delta,boolean chance,Tank p1){
-
-		Tank current=p1;
-//        if(!chance){
-//            current=p1;
-//            chance=!chance;
-//        }
-//        else{
-//            current=p2;
-//            chance=!chance;
-//        }
-		int vertical_force=0;
-		int horizontal_force=0;
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			horizontal_force-=1;
-		}
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			horizontal_force+=1;
-		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-			vertical_force+=1;
-		}
-		if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-			BULLETS x=new BULLETS(this,p1);
-		}
-		current.getPlayer().setLinearVelocity(horizontal_force*100,vertical_force*50);
-
-
 	}
 
 }

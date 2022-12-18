@@ -27,7 +27,7 @@ public class Terrain {
     TankWar game;
 
     public Terrain(TiledMap Map, World world, TankWar Game) {
-        tileset=(TiledMapTileLayer)Map.getLayers().get("Ground");
+        tileset=(TiledMapTileLayer)Map.getLayers().get(0);
         fixtureDef = new FixtureDef();
         bodyDef = new BodyDef();
         shape = new PolygonShape();
