@@ -17,32 +17,41 @@ public class Listner implements ContactListener{
     private BULLETS b;
     public HashMap<Fixture,Integer>destroy=new HashMap<Fixture, Integer>();
 
-    public Listner(TankWar game,Tank p1){
+
+    public Listner(TankWar game){
         this.parent= game;
-        this.p1=p1;
-        this.b=p1.bullets;
     }
     @Override
     public void beginContact(Contact contact) {
-        Point p;
         Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
+        if(fa.getUserData().toString()=="Ground"&&fb.getUserData().toString()=="Tank"){
+            parent.check=true;
+            System.out.println(fb.getUserData());
 
-
-
-
-        try{
-            System.out.println("ok");
-
+            ((Tank)fb.getUserData()).getPlayer().setGravityScale(0f);
         }
-        catch (Exception e){
-            System.out.println(e.getMessage()+"inside listner");
-        }
+
 
     }
 
     @Override
     public void endContact(Contact contact) {
+        parent.check=false;
+        Fixture fa=contact.getFixtureA();
+        Fixture fb=contact.getFixtureB();
+        if(fa.getUserData().toString()=="Tank"){
+            ((Tank)fa.getUserData()).getPlayer().setLinearVelocity(0,-9.8f);
+        }
+        if(fb.getUserData().toString()=="Tank"){
+            ((Tank)fb.getUserData()).getPlayer().setLinearVelocity(0,-9.8f);
+        }
+        if(fa.getUserData().toString()=="BULLET"){
+            parent.destroy.add(fa);
+        }
+        if(fb.getUserData().toString()=="BULLET"){
+            parent.destroy.add(fb);
+        }
 
     }
 
@@ -53,35 +62,15 @@ public class Listner implements ContactListener{
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-        int x=0;
-        Fixture fa= contact.getFixtureA();
+        Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
-        TiledMap tiledMap=parent.tiledMap;
-        TiledMapTileLayer tileset=(TiledMapTileLayer)parent.tiledMap.getLayers().get("Ground");
-        Point p;
-        Holder h;
-        try{
-            if((fa.getUserData().toString()=="BULLET"&&fb.getUserData().toString()=="Ground")){
-                parent.destroy.add(fa);
-                parent.destroy.add(fb);
-                try{
-                    tileset.setCell(((Holder)fb.getUserData()).p.getX(), ((Holder)fb.getUserData()).p.getY(),null);
-                }
-                catch (Exception e){
-
-                }
-            }
-            else if(fa.getUserData().toString()=="Ground"&&fb.getUserData().toString()=="BULLET"){
-                parent.destroy.add(fa);
-                parent.destroy.add(fb);
-            }
-
-
-
+        if(fa.getUserData().toString()=="Tank"){
+            parent.check=true;
         }
-        catch (Exception e) {
-            System.out.println("lol");
+        if(fb.getUserData().toString()=="Tank"){
+            parent.check=true;
         }
+
 
     }
 }

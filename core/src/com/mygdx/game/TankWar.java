@@ -44,13 +44,16 @@ public class TankWar extends Game {
 	public Box2DDebugRenderer box2DDebugRenderer;
 	public Array<Fixture>destroy=new Array<Fixture>();
 	public Array<Fixture>Bulletdestroy=new Array<Fixture>();
+	public Boolean check;
+
 
 
 	@Override
 	public void create () {
+		check=false;
 		fitViewport=new FitViewport(800,800);
 		batch = new SpriteBatch();
-		world=new World(new Vector2(0,0),false);
+		world=new World(new Vector2(0,-30f*9.8f),false);
 		box2DDebugRenderer=new Box2DDebugRenderer();
 		this.setScreen(new Gamescreen(this));
 		Tank1=new Texture("Tank1.png");

@@ -37,9 +37,10 @@ public class Terrain {
             for(int j=0;j<tileset.getHeight();j++){
                 try {
                     check=true;
-                    Object property = tileset.getCell(i, j).getTile().getProperties().get("1");
+                    Object property = tileset.getCell(i, j).getTile().getProperties().get("Ground");
                 }
                 catch (Exception e){
+                    System.out.println("LOL");
                     int k=0;
                     check=false;
                 }
