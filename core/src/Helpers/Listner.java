@@ -25,32 +25,78 @@ public class Listner implements ContactListener{
     public void beginContact(Contact contact) {
         Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
-        if(fa.getUserData().toString()=="Ground"&&fb.getUserData().toString()=="Tank"){
-            parent.check=true;
-            System.out.println(fb.getUserData());
+        if(fa.getUserData().toString()=="Ground"&&fb.getUserData().toString()=="Tank") {
+                if(((Tank)fb.getUserData()).getName()=="P1") {
+                    parent.check1 = true;
+                    System.out.println(((Tank)fb.getUserData()).getName());
+                    ((Tank) fb.getUserData()).getPlayer().setGravityScale(0f);
+                }
+                if(((Tank)fb.getUserData()).getName()=="P2") {
+                    parent.check2 = true;
+                    System.out.println(((Tank)fb.getUserData()).getName());
+                    ((Tank) fb.getUserData()).getPlayer().setGravityScale(0f);
+                }
 
-            ((Tank)fb.getUserData()).getPlayer().setGravityScale(0f);
         }
+        if(fb.getUserData().toString()=="Ground"&&fa.getUserData().toString()=="Tank") {
+            if(((Tank)fa.getUserData()).getName()=="P1") {
+                parent.check1 = true;
+                System.out.println(((Tank)fa.getUserData()).getName());
+                ((Tank) fa.getUserData()).getPlayer().setGravityScale(0f);
+            }
+            if(((Tank)fa.getUserData()).getName()=="P2") {
+                parent.check2 = true;
+                System.out.println(((Tank)fa.getUserData()).getName());
+                ((Tank) fa.getUserData()).getPlayer().setGravityScale(0f);
+            }
+
+        }
+        if(fb.getUserData().toString()=="BULLET"&&fa.getUserData().toString()=="Tank"){
+            ((Tank)fa.getUserData()).setHealth(((BULLETS)fb.getUserData()).Damage);
+        }
+
 
 
     }
 
     @Override
     public void endContact(Contact contact) {
-        parent.check=false;
         Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
-        if(fa.getUserData().toString()=="Tank"){
-            ((Tank)fa.getUserData()).getPlayer().setLinearVelocity(0,-9.8f);
+        try {
+            if (fa.getUserData().toString() == "Tank") {
+                if (((Tank) fa.getUserData()).getName() == "P1") {
+                    parent.check1=false;
+                    System.out.println(((Tank) fb.getUserData()).getName());
+                    ((Tank) fa.getUserData()).getPlayer().setLinearVelocity(0, -9.8f);
+                }
+                if (((Tank) fb.getUserData()).getName() == "P2") {
+                    parent.check2=false;
+                    System.out.println(((Tank) fb.getUserData()).getName());
+                    ((Tank) fb.getUserData()).getPlayer().setLinearVelocity(0, -9.8f);
+                }
+            }
+            if (fb.getUserData().toString() == "Tank") {
+                if (((Tank) fb.getUserData()).getName() == "P1") {
+                    parent.check1=false;
+                    System.out.println(((Tank) fb.getUserData()).getName());
+                    ((Tank) fb.getUserData()).getPlayer().setLinearVelocity(0, -9.8f);
+                }
+                if (((Tank) fb.getUserData()).getName() == "P2") {
+                    parent.check2=false;
+                    System.out.println(((Tank) fb.getUserData()).getName());
+                    ((Tank) fb.getUserData()).getPlayer().setLinearVelocity(0, -9.8f);
+                }
+            }
+            if (fa.getUserData().toString() == "BULLET") {
+                parent.destroy.add(fa);
+            }
+            if (fb.getUserData().toString() == "BULLET") {
+                parent.destroy.add(fb);
+            }
         }
-        if(fb.getUserData().toString()=="Tank"){
-            ((Tank)fb.getUserData()).getPlayer().setLinearVelocity(0,-9.8f);
-        }
-        if(fa.getUserData().toString()=="BULLET"){
-            parent.destroy.add(fa);
-        }
-        if(fb.getUserData().toString()=="BULLET"){
-            parent.destroy.add(fb);
+        catch (Exception e){
+            System.out.println(e);
         }
 
     }
@@ -64,11 +110,24 @@ public class Listner implements ContactListener{
     public void postSolve(Contact contact, ContactImpulse impulse) {
         Fixture fa=contact.getFixtureA();
         Fixture fb=contact.getFixtureB();
-        if(fa.getUserData().toString()=="Tank"){
-            parent.check=true;
+        if(fb.getUserData().toString()=="Tank") {
+            if (((Tank) (fb.getUserData())).getName() == "P1") {
+                parent.check1 = true;
+            }
+            else{
+                parent.check2=true;
+            }
+
         }
-        if(fb.getUserData().toString()=="Tank"){
-            parent.check=true;
+        if(fa.getUserData().toString()=="Tank"){
+            if (((Tank) (fa.getUserData())).getName() == "P1"){
+                parent.check1=true;
+
+            }
+            else{
+                parent.check2=true;
+            }
+
         }
 
 

@@ -60,9 +60,9 @@ public class MainMenuScreen implements Screen {
         }
         game.batch.begin();
         int x=(TankWar.x-Play_Button_Width)/2;
-        game.batch.draw(img, 0, 0,1600,900);
-        if(Gdx.input.getX()<x+Play_Button_Width&&Gdx.input.getX()>x&&TankWar.y-Gdx.input.getY()<(Play_Button_Y+250)&&TankWar.y-Gdx.input.getY()>Play_Button_Y+Play_Button_Width){
-            game.batch.draw(Playbutton_Active,(TankWar.x-Play_Button_Width)/2,500,Play_Button_Width,Play_Button_Height);
+        game.batch.draw(img, 0, 0,800,800);
+        if(Gdx.input.getX()<(400+(100/2f))&&Gdx.input.getX()>(400-(100/2f))&&800-Gdx.input.getY()>(500-(100/2f))&&800-Gdx.input.getY()<500+(100/2f)){
+            game.batch.draw(Playbutton_Active,(400-(100/2f)),(500-(100/2f)),100,100);
             if(Gdx.input.isTouched()){
                 sound.play();
                 game.setScreen(new BUFFERSCREEN(new StartGameScreen(game),game));
@@ -71,16 +71,16 @@ public class MainMenuScreen implements Screen {
 
         }
         else{
-            game.batch.draw(Playbutton_Inactive,(TankWar.x-Play_Button_Width)/2,500,Play_Button_Width,Play_Button_Height);
+            game.batch.draw(Playbutton_Inactive,(400-(100/2f)),(500-(100/2f)),100,100);
         }
-        if(Gdx.input.getX()<x+Exit_Button_Width&&Gdx.input.getX()>x&&TankWar.y-Gdx.input.getY()<475&&TankWar.y-Gdx.input.getY()>250+125){
-            game.batch.draw(ExitButton_Active,(TankWar.x-Exit_Button_Width)/2,250,Exit_Button_Width,Exit_Button_Height);
+        if(Gdx.input.getX()<(400+(100/2f))&&Gdx.input.getX()>(400-(100/2f))&&800-Gdx.input.getY()<(300+(100/2f))&&800-Gdx.input.getY()>300-(100/2f)){
+            game.batch.draw(ExitButton_Active,(400-(100/2f)),(300-(100/2f)),100,100);
             if(Gdx.input.isTouched()){
                 Gdx.app.exit();
             }
         }
         else{
-            game.batch.draw(ExitButton_Inactive,(TankWar.x-Exit_Button_Width)/2,250,Exit_Button_Width,Exit_Button_Height);
+            game.batch.draw(ExitButton_Inactive,(400-(100/2f)),(300-(100/2f)),100,100);
         }
         game.batch.end();
     }

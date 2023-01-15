@@ -36,37 +36,33 @@ public class StartGameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0.5f,0.5f,0.5f,0);
         game.batch.begin();
-        game.batch.draw(Tank_load,0,0,1600,900);
-        game.batch.draw(back_inactive,(1600-150)/2,(900-450)/2,100,45);
+        game.batch.draw(Tank_load,0,0,800,800);
+        game.batch.draw(back_inactive,400-(100/2f),(200-50/2f),100,50);
+        if(Gdx.input.getX()<(400+(100/2f))&&Gdx.input.getX()>(400-(100/2f))&&800-Gdx.input.getY()<(200+(50/2f))&&800-Gdx.input.getY()>(200-(50/2f))) {
+            game.batch.draw(back_active,400-(100/2f),(200-50/2f),100,50);
+            if(Gdx.input.isTouched()){
+                game.setScreen(new BUFFERSCREEN(new MainMenuScreen(game),game));
+            }
+        }
 
 
-
-        if(Gdx.input.getX()<(1600-150)/2+170&&Gdx.input.getX()>(1600-170)/2&&TankWar.y-Gdx.input.getY()<450+170&&TankWar.y-Gdx.input.getY()>450+100){
-            game.batch.draw(newgame_active,(1600-150)/2,(900)/2,170,45);
+        if(Gdx.input.getX()<(400+(150/2f))&&Gdx.input.getX()>(400-(150/2f))&&800-Gdx.input.getY()<500+(70/2f)&&800-Gdx.input.getY()>(500-(70/2f))){
+            game.batch.draw(newgame_active,400-(100/2f),500-(70/2f),150,60);
             if(Gdx.input.isTouched()){
                 game.setScreen(new BUFFERSCREEN(new SelectTankScreen(game),game));
             }
         }
         else{
-            game.batch.draw(newgame_inactive,(1600-150)/2,(900)/2,170,45);
+            game.batch.draw(newgame_inactive,400-(100/2f),500-(70/2f),150,60);
 
         }
-        if(Gdx.input.getX()<(1600-150)/2+170&&Gdx.input.getX()>(1600-170)/2&&TankWar.y-Gdx.input.getY()<450+70&&TankWar.y-Gdx.input.getY()>450+20) {
-            game.batch.draw(loadgame_active,(1600-150)/2,(900-200)/2,175,45);
+        if(Gdx.input.getX()<(400+(150/2f))&&Gdx.input.getX()>(400-(150/2f))&&800-Gdx.input.getY()<350+(45/2f)&&800-Gdx.input.getY()>350-(45/2f)) {
+            game.batch.draw(loadgame_active,400-(150/2f),(350-45/2f),150,45);
         }
         else{
-            game.batch.draw(loadgame_inactive,(1600-150)/2,(900-200)/2,175,45);
+            game.batch.draw(loadgame_inactive,400-(150/2f),(350-(45/2f)),150,45);
         }
 
-        if(Gdx.input.getX()<(1600-150)/2+100&&Gdx.input.getX()>(1600-170)/2&&TankWar.y-Gdx.input.getY()<450-45&&TankWar.y-Gdx.input.getY()>450-115) {
-            game.batch.draw(back_active,(1600-150)/2,(900-450)/2,100,45);
-            if(Gdx.input.isTouched()){
-                game.setScreen(new BUFFERSCREEN(new MainMenuScreen(game),game));
-            }
-        }
-        else {
-            game.batch.draw(back_inactive,(1600-150)/2,(900-450)/2,100,45);
-        }
 
 
 

@@ -40,30 +40,31 @@ public class PLAYERVERSUSSCREEN implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0,0,0.1f,0);
         game.batch.begin();
-        if(Gdx.input.getX()<(1600-150)/2+100&&Gdx.input.getX()>(1600-170)/2&&TankWar.y-Gdx.input.getY()<200+25&&TankWar.y-Gdx.input.getY()>200-30) {
-            game.batch.draw(back_active, (1600 - 150 - 50) / 2, 65, 100, 25);
+        if(Gdx.input.getX()<(400+(50/2f))&&Gdx.input.getX()>(400-(50/2f))/2&&800-Gdx.input.getY()<(200+(25/2f))&&TankWar.y-Gdx.input.getY()>200-(25/2f)) {
+            game.batch.draw(back_active,400-(50/2f),(200-25/2f),50,25);
             if(Gdx.input.isTouched()){
-                game.setScreen(new SelectTankScreenP2(game));
+                game.setScreen(new BUFFERSCREEN(new SelectTankScreenP2(game),game));
             }
         }
-        else{
-            game.batch.draw(back_inactive, (1600 - 150 - 50) / 2, 65, 100, 25);
+
+        else {
+            game.batch.draw(back_inactive,400-(50/2f),(200-25/2f),50,25);;
         }
-        if(Gdx.input.getX()<(1600/2)+70&&Gdx.input.getX()>(1600/2)-(300/2)&&TankWar.y-Gdx.input.getY()<800+40&&TankWar.y-Gdx.input.getY()>800){
-            game.batch.draw(Start_game_active,(1600/2)-(300/2),700,220,20);
+        if(Gdx.input.getX()<400+(100/2f)&&Gdx.input.getX()>((400-(100/2f)))&&800-Gdx.input.getY()<600+(50/2f)&&800-Gdx.input.getY()>600-(50/2f)){
+            game.batch.draw(Start_game_active,400-(100/2f),600-(50/2f),100,50);
             if(Gdx.input.isTouched()){
                 game.setScreen(new Gamescreen(game));
             }
 
         }
         else{
-            game.batch.draw(Start_game_inactive,(1600/2)-(300/2),700,220,20);
+            game.batch.draw(Start_game_inactive,400-(100/2f),600-(50/2f),100,50);
         }
-        game.batch.draw(versus,(1600)/2-100,(900)/2,90,40);
-        game.batch.draw(player_1,(1600)/2-400,400+200,200,35);
-        game.batch.draw(player_2,(1600)/2+100,400+200,200,35);
-        game.batch.draw(game.getTank1(),(1600/2)-400,400,200,200);
-        game.batch.draw(game.getTank2(),(1600/2)+100,400,200,200);
+        game.batch.draw(versus,(400)-90/2f,(400-40/2f),90,40);
+        game.batch.draw(player_1,(300-(100/2f)),400-(20/2f),100,20);
+        game.batch.draw(player_2,(500-(100/2f)),400-(20/2f),100,20);
+        game.batch.draw(game.getTank1(),(300-(100/2f)),(250-(100/2f)),100,100);
+        game.batch.draw(game.getTank2(),(500-(100/2f)),(250-(100/2f)),100,100);
         game.batch.end();
 
     }

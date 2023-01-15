@@ -39,42 +39,41 @@ public class SelectTankScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0,0,0.1f,0);
         game.batch.begin();
-        game.batch.draw(Select,(1600)/2-250,(900-170),400,55);
-        game.batch.draw(Player1,(1600)/2-135,900-250,200,35);
-        if(Gdx.input.getX()<(1600-150)/2+100&&Gdx.input.getX()>(1600-170)/2&&TankWar.y-Gdx.input.getY()<450-45-100-50&&TankWar.y-Gdx.input.getY()>450-115-100-50) {
-            game.batch.draw(back_active,(1600-150)/2,65,100,45);
+        game.batch.draw(Select,(400-200/2f),(700-28/2f),200,28);
+        game.batch.draw(Player1,(400-(100/2f)),650-(20/2f),100,20);
+        if(Gdx.input.getX()<(400+(50/2f))&&Gdx.input.getX()>(400-(50/2f))/2&&800-Gdx.input.getY()<(200+(25/2f))&&TankWar.y-Gdx.input.getY()>200-(25/2f)) {
+            game.batch.draw(back_active,400-(50/2f),(200-25/2f),50,25);
             if(Gdx.input.isTouched()){
-
                 game.setScreen(new BUFFERSCREEN(new StartGameScreen(game),game));
             }
         }
 
         else {
-            game.batch.draw(back_inactive,(1600-150)/2,65,100,45);
+            game.batch.draw(back_inactive,400-(50/2f),(200-25/2f),50,25);;
         }
-        if(Gdx.input.getX()<200+200&&Gdx.input.getX()>180&&TankWar.y-Gdx.input.getY()<400+250&&TankWar.y-Gdx.input.getY()>550){
-            game.batch.draw(tank1,200,400,300,300);
+        if(Gdx.input.getX()<200+(100/2f)&&Gdx.input.getX()>(200-(100/2f))&&800-Gdx.input.getY()<400+(100/2f)&&800-Gdx.input.getY()>(400-(100/2f))){
+            game.batch.draw(tank1,200-(100/2f),(400-(100/2f)),100,100);
             if(Gdx.input.isTouched()){
                 this.game.setTank1(tank1);
                 game.setScreen(new BUFFERSCREEN(new SelectTankScreenP2(game),game));
             }
         }
         else{
-            game.batch.draw(tank1,200,400,200,200);
+            game.batch.draw(tank1,200-(50/2f),400-(50/2f),50,50);
         }
-        if(Gdx.input.getX()<200+200+200+200&&Gdx.input.getX()>650&&TankWar.y-Gdx.input.getY()<400+250&&TankWar.y-Gdx.input.getY()>550){
-            game.batch.draw(tank2,650,400,300,300);
+        if(Gdx.input.getX()<(400+(50/2f))&&Gdx.input.getX()>400-(100/2f)&&800-Gdx.input.getY()<400+(50/2f)&&TankWar.y-Gdx.input.getY()>400-(50/2f)){
+            game.batch.draw(tank2,400-(100/2f),400-(100/2f),100,100);
             if(Gdx.input.isTouched()){
                 this.game.setTank1(tank2);
                 game.setScreen(new BUFFERSCREEN(new SelectTankScreenP2(game),game));
             }
         }
         else{
-            game.batch.draw(tank2,650,400,200,200);
+            game.batch.draw(tank2,400-(50/2f),400-(50/2f),50,50);
         }
-        if(Gdx.input.getX()<1150+300&&Gdx.input.getX()>1150&&TankWar.y-Gdx.input.getY()<400+250&&TankWar.y-Gdx.input.getY()>550){
+        if(Gdx.input.getX()<550+(50/2f)&&Gdx.input.getX()>550-(50/2f)&&800-Gdx.input.getY()<400+(25/2f)&&TankWar.y-Gdx.input.getY()>400-(25/2f)){
 
-            game.batch.draw(tank3,1100,450,300,200);
+            game.batch.draw(tank3,550-(100/2f),400-(50/2f),100,50);
 
             if(Gdx.input.isTouched()){
                 this.game.setTank1(tank3);
@@ -84,7 +83,7 @@ public class SelectTankScreen implements Screen {
 
         }
         else{
-            game.batch.draw(tank3,1100,450,200,100);
+            game.batch.draw(tank3,550-(50/2f),400-(25/2f),50,25);
         }
 
 
