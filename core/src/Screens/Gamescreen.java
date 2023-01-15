@@ -219,12 +219,12 @@ public class Gamescreen implements Screen {
             if(game.check2) {
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && p2.getFuel() > 0) {
                     horizontal_force -= 1;
-                    this.p2.getFuel();
+                    this.p2.setFuel();
                     vertical_force += 1;
                 }
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && p2.getFuel() > 0) {
                     horizontal_force += 1;
-                    this.p2.getFuel();
+                    this.p2.setFuel();
                     vertical_force += 1;
                 }
 
